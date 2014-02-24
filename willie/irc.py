@@ -429,8 +429,8 @@ class Bot(asynchat.async_chat):
 
             if recipient_id not in self.stack:
                 self.stack[recipient_id] = []
-            elif self.stack[recipient_id]:
-                elapsed = time.time() - self.stack[recipient_id][-1][0]
+            elif self.stack[recipient_id] and len(self.stack[recipient_id]) >= 6:
+                elapsed = time.time() - self.stack[recipient_id][-6][0]
                 if elapsed < 3:
                     penalty = float(max(0, len(text) - 50)) / 70
                     wait = 0.7 + penalty
